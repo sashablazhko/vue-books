@@ -21,7 +21,7 @@ export default new Router({
       component: Search
     },
     {
-      path: "/details/:id",
+      path: "/details/:bookId/:chapterId",
       name: "details",
       component: Details
     },

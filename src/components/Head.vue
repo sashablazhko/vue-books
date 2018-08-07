@@ -2,7 +2,7 @@
   <header>
     <h1>
       <router-link :to="{name: 'landing'}">
-        sbooks
+        kidsbook
       </router-link> 
     </h1>
     <slot></slot>

@@ -1,8 +1,9 @@
 import axios from "axios";
+import { apiHost } from "../../config";
 
 export default () => {
   return axios.create({
-    baseURL: `http://laravel-books/api`,
+    baseURL: `${apiHost}/api`,
     withCredentials: false,
     headers: {
       Accept: "application/json",
