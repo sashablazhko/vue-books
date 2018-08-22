@@ -1,11 +1,24 @@
 <template>
-  <div class="search">
+  <div>
     <Head>
-      <input :value="searchTerm" @input="updateSearchTerm" type="text" placeholder="Поиск" />
+      <!-- <input :value="searchTerm" @input="updateSearchTerm" type="text" placeholder="Поиск" /> -->
+      <v-text-field 
+        :value="searchTerm" 
+        @keyup="updateSearchTerm"
+        class="inp"
+        label="Поиск"
+        solo
+        light
+      ></v-text-field>
     </Head>
-    <div>
-      <book-card v-for="book in filteredBooks" :key="book.imdbID" :book="book" />
-    </div>
+    <v-content></v-content>
+    <v-container fluid>
+      <v-layout row wrap>
+        <v-flex xs12 md6 lg4 v-for="book in filteredBooks" :key="book.id_book" class="mb-2" >
+          <book-card :book="book" />
+        </v-flex>
+      </v-layout>
+    </v-container>
   </div>
 </template>
 
@@ -17,11 +30,14 @@ import BookCard from "./BookCard.vue";
 export default {
   name: "search",
   computed: {
-    ...mapGetters(["filteredBooks", "searchTerm"])
+    ...mapGetters({
+      filteredBooks: "books/filteredBooks",
+      searchTerm: "books/searchTerm"
+    })
   },
   methods: {
     updateSearchTerm(e) {
-      this.$store.commit("updateSearchTerm", e.target.value);
+      this.$store.commit("books/updateSearchTerm", e.target.value);
     }
   },
   components: {
@@ -30,3 +46,12 @@ export default {
   }
 };
 </script>
+
+<style>
+.inp {
+  max-width: 300px;
+}
+.inp .v-input__slot {
+  margin-bottom: 0 !important;
+}
+</style>

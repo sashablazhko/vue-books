@@ -1,13 +1,9 @@
 import Vue from "vue";
-import Vuex from "vuex";
-import Books from "./services/BooksService";
-// import preload from "../data.json";
+import Books from "../../services/BooksService";
 
-Vue.use(Vuex);
-
-export default new Vuex.Store({
+export default {
+  namespaced: true,
   state: {
-    // books2: preload.shows,
     books: [],
     searchTerm: ""
   },
@@ -26,6 +22,9 @@ export default new Vuex.Store({
   mutations: {
     updateSearchTerm(state, searchTerm) {
       state.searchTerm = searchTerm;
+    },
+    clearSearchTerm(state) {
+      state.searchTerm = "";
     },
     SET_BOOKS(state, { books }) {
       state.books = books;
@@ -60,4 +59,4 @@ export default new Vuex.Store({
       );
     }
   }
-});
+};

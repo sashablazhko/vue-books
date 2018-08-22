@@ -1,13 +1,13 @@
 <template>
-  <div class="app">
+  <v-app>
     <router-view/>
-  </div>
+  </v-app>
 </template>
 
 <script>
 export default {
   mounted() {
-    this.$store.dispatch("GET_BOOKS_API");
+    this.$store.dispatch("books/GET_BOOKS_API");
   }
 };
 </script>
