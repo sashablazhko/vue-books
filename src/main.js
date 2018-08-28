@@ -1,5 +1,6 @@
 import Vue from "vue";
 import Vuetify from "vuetify";
+import VeeValidate, { Validator } from 'vee-validate';
 import App from "./App.vue";
 import router from "./router";
 import store from "./store";
@@ -14,6 +15,9 @@ Vue.use(Vuetify, {
     error: "#b71c1c"
   }
 });
+import ru from 'vee-validate/dist/locale/ru';
+Validator.localize('ru', ru);
+Vue.use(VeeValidate);
 
 Vue.config.productionTip = false;
 

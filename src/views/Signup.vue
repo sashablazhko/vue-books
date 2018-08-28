@@ -9,39 +9,48 @@
                 <v-layout row>
                   <v-flex xs12>
                     <v-text-field
-                      name="email"
-                      label="Mail"
+                      name="email_field"
+                      label="Email"
                       id="email"
                       v-model="email"
                       type="email"
-                      required></v-text-field>
+                      required
+                      :error-messages="errors.collect('email')"
+                      v-validate="'email|required'"
+                      data-vv-name="email"></v-text-field>
                   </v-flex>
                 </v-layout>
                 <v-layout row>
                   <v-flex xs12>
                     <v-text-field
-                      name="password"
+                      name="password_field"
+                      ref="password_field"
                       label="Пароль"
                       id="password"
                       v-model="password"
                       type="password"
-                      required></v-text-field>
+                      required
+                      data-vv-as="пароль"></v-text-field>
                   </v-flex>
                 </v-layout>
                 <v-layout row>
                   <v-flex xs12>
                     <v-text-field
-                      name="confirmPassword"
+                      name="confirm_field"
                       label="Подтвердите пароль"
                       id="confirmPassword"
                       v-model="confirmPassword"
                       type="password"
-                      :rules="[comparePasswords]"></v-text-field>
+                      required
+                      :error-messages="errors.collect('confirm_field')"
+                      v-validate="'confirmed:password_field|required'"
+                      data-vv-name="confirm_field"
+                      data-vv-as="подтверждения"></v-text-field>
                   </v-flex>
                 </v-layout>
                 <v-layout row>
                   <v-flex xs12>
-                    <v-btn type="submit">Регистрация</v-btn>
+                    <v-btn @click="isFormValid" type="submit" >Регистрация</v-btn>
                   </v-flex>
                 </v-layout>
               </form>
@@ -62,16 +71,14 @@ export default {
       confirmPassword: ""
     };
   },
-  computed: {
-    comparePasswords() {
-      return this.password !== this.confirmPassword
-        ? "Пароли не совпадают"
-        : "";
-    }
-  },
   methods: {
     onSignup() {
       // Vuex
+    },
+    isFormValid() {
+      let res = Object.keys(this.fields).every(key => this.fields[key].valid);
+      console.log(res);
+      return Object.keys(this.fields).every(key => this.fields[key].valid);
     }
   }
 };
