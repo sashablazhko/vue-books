@@ -30,6 +30,12 @@ export default {
     },
     ADD_AUTHOR(state, { authorData }) {
       state.authors.unshift(authorData);
+    },
+    DELETE_AUTHOR(state, { authorData }) {
+      let authorIndex = state.authors.findIndex(
+        a => a.id_author == authorData.id_author
+      );
+      state.authors.splice(authorIndex, 1);
     }
   },
   actions: {
@@ -48,6 +54,12 @@ export default {
     ADD_AUTHOR_API: ({ commit }, { authorName }) => {
       AdminService.addAuthor(authorName).then(
         res => commit("ADD_AUTHOR", { authorData: res.data.author }),
+        err => console.log(err)
+      );
+    },
+    DELETE_AUTHOR_API: ({ commit }, { idAuthor }) => {
+      AdminService.deleteAuthor(idAuthor).then(
+        res => commit("DELETE_AUTHOR", { authorData: res.data.author }),
         err => console.log(err)
       );
     }

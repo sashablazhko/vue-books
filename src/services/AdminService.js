@@ -13,5 +13,8 @@ export default {
     return Api().post(`/admin/addauthor`, {
       author_name: authorName
     });
+  },
+  deleteAuthor(idAuthor) {
+    return Api().delete(`/admin/deleteauthor/${idAuthor}`);
   }
 };
